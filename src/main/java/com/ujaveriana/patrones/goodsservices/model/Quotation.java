@@ -4,19 +4,18 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Item {
-
+public class Quotation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String description;
-    @Enumerated(EnumType.STRING)
-    private ItemType itemType;
-    @ManyToMany
-    private Set<UserApp> users;
+    @ManyToOne
+    private UserApp client;
     @OneToMany
-    private Set<Quotation> quotations;
+    private Set<Offer> offers;
+    @ManyToOne
+    private Item item;
 
     public int getId() {
         return id;
@@ -42,28 +41,27 @@ public class Item {
         this.description = description;
     }
 
-    public ItemType getItemType() {
-        return itemType;
+    public UserApp getClient() {
+        return client;
     }
 
-    public void setItemType(ItemType itemType) {
-        this.itemType = itemType;
+    public void setClient(UserApp client) {
+        this.client = client;
     }
 
-    public Set<UserApp> getUsers() {
-        return users;
+    public Set<Offer> getOffers() {
+        return offers;
     }
 
-    public void setUsers(Set<UserApp> users) {
-        this.users = users;
+    public void setOffers(Set<Offer> offers) {
+        this.offers = offers;
     }
 
-    public Set<Quotation> getQuotations() {
-        return quotations;
+    public Item getItem() {
+        return item;
     }
 
-    public void setQuotations(Set<Quotation> quotations) {
-        this.quotations = quotations;
+    public void setItem(Item item) {
+        this.item = item;
     }
 }
-
