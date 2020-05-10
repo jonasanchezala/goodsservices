@@ -11,6 +11,7 @@ public class Item {
     private int id;
     private String name;
     private String description;
+    @Enumerated(EnumType.STRING)
     private ItemType itemType;
     @ManyToMany
     private Set<UserApp> users;

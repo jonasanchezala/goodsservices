@@ -1,8 +1,6 @@
 package com.ujaveriana.patrones.goodsservices.controller;
 
-import com.ujaveriana.patrones.goodsservices.model.Credential;
 import com.ujaveriana.patrones.goodsservices.model.UserApp;
-import com.ujaveriana.patrones.goodsservices.service.LoginService;
 import com.ujaveriana.patrones.goodsservices.service.UserAppService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
