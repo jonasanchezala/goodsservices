@@ -1,6 +1,7 @@
 package com.ujaveriana.patrones.goodsservices.controller;
 
 import com.ujaveriana.patrones.goodsservices.model.Credential;
+import com.ujaveriana.patrones.goodsservices.model.LoginResponse;
 import com.ujaveriana.patrones.goodsservices.service.LoginService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class LoginController {
 
     @CrossOrigin
     @PostMapping
-    public boolean Post(@RequestBody Credential credential) {
+    public LoginResponse Post(@RequestBody Credential credential) {
         return loginService.validateLogin(credential);
     }
 }

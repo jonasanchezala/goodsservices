@@ -1,6 +1,7 @@
 package com.ujaveriana.patrones.goodsservices.service;
 
 import com.ujaveriana.patrones.goodsservices.model.Credential;
+import com.ujaveriana.patrones.goodsservices.model.LoginResponse;
 import com.ujaveriana.patrones.goodsservices.model.UserApp;
 import com.ujaveriana.patrones.goodsservices.repository.UserAppRepository;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,16 @@ public class LoginService {
         this.userAppRepository = userAppRepository;
     }
 
-    public boolean validateLogin(Credential credential){
+    public LoginResponse validateLogin(Credential credential){
+        LoginResponse loginResponse = new LoginResponse();
 
         UserApp userApp = userAppRepository.findByEmail(credential.getEmail());
         boolean  validCredentials = Objects.nonNull(userApp)
                                 && userApp.getPassword().equals(credential.getPassword());
 
-        return validCredentials;
+        loginResponse.setValidCredentials(validCredentials);
+        loginResponse.setUser(userApp);
+
+        return loginResponse;
     }
 }
