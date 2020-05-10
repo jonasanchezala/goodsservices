@@ -1,5 +1,6 @@
 package com.ujaveriana.patrones.goodsservices.controller;
 
+import com.ujaveriana.patrones.goodsservices.model.AddItemsRequest;
 import com.ujaveriana.patrones.goodsservices.model.UserApp;
 import com.ujaveriana.patrones.goodsservices.service.UserAppService;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class UserAppController {
     }
 
     @PutMapping("{id}")
-    public UserApp Put(@RequestBody UserApp newUserApp, @PathVariable Integer id) {
-        return userAppService.updateUser(id, newUserApp);
+    public UserApp addItems(@RequestBody AddItemsRequest addItemsRequest, @PathVariable Integer id) {
+        return userAppService.addItems(id, addItemsRequest.getItemsId());
     }
 }

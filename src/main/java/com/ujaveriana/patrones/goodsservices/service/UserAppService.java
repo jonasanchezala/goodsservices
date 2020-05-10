@@ -1,21 +1,23 @@
 package com.ujaveriana.patrones.goodsservices.service;
 
-import com.ujaveriana.patrones.goodsservices.model.Credential;
+import com.ujaveriana.patrones.goodsservices.model.Item;
 import com.ujaveriana.patrones.goodsservices.model.UserApp;
+import com.ujaveriana.patrones.goodsservices.repository.ItemRepository;
 import com.ujaveriana.patrones.goodsservices.repository.UserAppRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserAppService {
 
     private final UserAppRepository userAppRepository;
+    private final ItemRepository itemRepository;
 
-    public UserAppService(UserAppRepository userAppRepository) {
+    public UserAppService(UserAppRepository userAppRepository,
+                          ItemRepository itemRepository) {
         this.userAppRepository = userAppRepository;
+        this.itemRepository = itemRepository;
     }
 
     public UserApp createUser(UserApp userApp){
@@ -30,11 +32,18 @@ public class UserAppService {
         return userAppRepository.findById(id).orElse(null);
     }
 
-    public UserApp updateUser(Integer id, UserApp newUserApp) {
+    public UserApp addItems(Integer id, List<Integer> itemsId) {
         UserApp userApp = userAppRepository.findById(id).orElse(null);
 
         if(Objects.nonNull(userApp)){
-            userApp.setItems(newUserApp.getItems());
+            Set<Item> itemSet = new HashSet<>();
+
+            itemsId.stream().forEach(itemId -> {
+                Item item = itemRepository.findById(itemId).orElse(null);
+                itemSet.add(item);
+            });
+
+            userApp.setItems(itemSet);
         }
 
         return userAppRepository.save(userApp);
