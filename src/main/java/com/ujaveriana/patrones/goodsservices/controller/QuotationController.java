@@ -1,6 +1,8 @@
 package com.ujaveriana.patrones.goodsservices.controller;
 
+import com.ujaveriana.patrones.goodsservices.model.Offer;
 import com.ujaveriana.patrones.goodsservices.model.Quotation;
+import com.ujaveriana.patrones.goodsservices.model.QuotationRequest;
 import com.ujaveriana.patrones.goodsservices.model.UserApp;
 import com.ujaveriana.patrones.goodsservices.service.QuotationService;
 import com.ujaveriana.patrones.goodsservices.service.UserAppService;
@@ -19,8 +21,8 @@ public class QuotationController {
     }
 
     @PostMapping
-    public Quotation Post(@RequestBody Quotation quotation) {
-        return quotationService.createQuotation(quotation);
+    public Quotation Post(@RequestBody QuotationRequest quotationRequest) {
+        return quotationService.createQuotation(quotationRequest);
     }
 
     @GetMapping
@@ -33,8 +35,8 @@ public class QuotationController {
         return quotationService.findById(id);
     }
 
-    @PutMapping("{id}")
-    public Quotation Put(@RequestBody Quotation newQuotation, @PathVariable Integer id) {
-        return quotationService.updateQuotation(id, newQuotation);
+    @PutMapping("addOffer/{id}")
+    public Quotation addOffer(@RequestBody Offer offer, @PathVariable Integer id) {
+        return quotationService.addOffer(id, offer);
     }
 }

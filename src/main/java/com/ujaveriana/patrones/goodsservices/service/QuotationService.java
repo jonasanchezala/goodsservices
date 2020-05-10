@@ -1,9 +1,7 @@
 package com.ujaveriana.patrones.goodsservices.service;
 
-import com.ujaveriana.patrones.goodsservices.model.Credential;
-import com.ujaveriana.patrones.goodsservices.model.Offer;
-import com.ujaveriana.patrones.goodsservices.model.Quotation;
-import com.ujaveriana.patrones.goodsservices.model.UserApp;
+import com.ujaveriana.patrones.goodsservices.model.*;
+import com.ujaveriana.patrones.goodsservices.repository.ItemRepository;
 import com.ujaveriana.patrones.goodsservices.repository.QuotationRepository;
 import com.ujaveriana.patrones.goodsservices.repository.UserAppRepository;
 import org.springframework.stereotype.Service;
@@ -15,12 +13,27 @@ import java.util.Objects;
 public class QuotationService {
 
     private final QuotationRepository quotationRepository;
+    private final UserAppRepository userAppRepository;
+    private final ItemRepository itemRepository;
 
-    public QuotationService(QuotationRepository quotationRepository) {
+    public QuotationService(QuotationRepository quotationRepository,
+                            UserAppRepository userAppRepository,
+                            ItemRepository itemRepository) {
         this.quotationRepository = quotationRepository;
+        this.userAppRepository = userAppRepository;
+        this.itemRepository = itemRepository;
     }
 
-    public Quotation createQuotation(Quotation quotation){
+    public Quotation createQuotation(QuotationRequest quotationRequest){
+        UserApp userApp = userAppRepository.findById(quotationRequest.getClientId()).orElse(null);
+        Item item = itemRepository.findById(quotationRequest.getItemId()).orElse(null);
+
+        Quotation quotation = new Quotation();
+        quotation.setName(quotationRequest.getName());
+        quotation.setDescription(quotationRequest.getDescription());
+        quotation.setClient(userApp);
+        quotation.setItem(item);
+
         return quotationRepository.save(quotation);
     }
 
@@ -32,12 +45,10 @@ public class QuotationService {
         return quotationRepository.findById(id).orElse(null);
     }
 
-    public Quotation updateQuotation(Integer id, Quotation newQuotation) {
+    public Quotation addOffer(Integer id, Offer offer) {
         Quotation quotation = quotationRepository.findById(id).orElse(null);
 
         if(Objects.nonNull(quotation)){
-            Offer offer = newQuotation.getOffers().stream().findFirst().orElse(null);
-
             quotation.getOffers().add(offer);
         }
 
