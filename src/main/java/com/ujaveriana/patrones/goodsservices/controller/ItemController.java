@@ -21,4 +21,9 @@ public class ItemController {
     public List<Item> Get() {
         return itemService.listItems();
     }
+
+    @PostMapping
+    public Item Post(@RequestBody Item item){
+        return itemService.createItem(item);
+    }
 }
