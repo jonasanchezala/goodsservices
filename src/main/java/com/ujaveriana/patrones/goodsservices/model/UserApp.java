@@ -12,6 +12,7 @@ public class UserApp {
     private String email;
     private String password;
     private String name;
+    @Enumerated(EnumType.STRING)
     private Profile profile;
     @ManyToMany
     private Set<Item> items;
