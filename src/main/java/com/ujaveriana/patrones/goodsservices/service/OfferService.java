@@ -13,11 +13,18 @@ import java.util.List;
 
 @Service
 public class OfferService {
+
+
+    private final EmailService emailService;
     private final OfferRepository offerRepository;
     private final QuotationRepository quotationRepository;
     private final UserAppRepository userAppRepository;
 
-    public OfferService(OfferRepository offerRepository, QuotationRepository quotationRepository, UserAppRepository userRepository) {
+    public OfferService(EmailService emailService,
+                        OfferRepository offerRepository,
+                        QuotationRepository quotationRepository,
+                        UserAppRepository userRepository) {
+        this.emailService = emailService;
         this.offerRepository = offerRepository;
         this.quotationRepository = quotationRepository;
         this.userAppRepository = userRepository;
@@ -32,6 +39,8 @@ public class OfferService {
         offer.setPrice(offerRequest.getPrice());
         offer.setUserApp(supplier);
         offer.setQuotation(quotation);
+
+        emailService.sendEmail(quotation.getUserApp().getEmail(), quotation.getName(), supplier.getName());
 
         return offerRepository.save(offer);
     }
