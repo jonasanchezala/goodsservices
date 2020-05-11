@@ -11,7 +11,7 @@ public class Offer {
     private String decription;
     private Double price;
     @ManyToOne(fetch = FetchType.LAZY)
-    private UserApp supplier;
+    private UserApp userApp;
     @ManyToOne(fetch = FetchType.LAZY)
     private Quotation quotation;
 
@@ -39,19 +39,19 @@ public class Offer {
         this.price = price;
     }
 
-    public UserApp getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(UserApp supplier) {
-        this.supplier = supplier;
-    }
-
     public Quotation getQuotation() {
         return quotation;
     }
 
     public void setQuotation(Quotation quotation) {
         this.quotation = quotation;
+    }
+
+    public UserApp getUserApp() {
+        return userApp;
+    }
+
+    public void setUserApp(UserApp userApp) {
+        this.userApp = userApp;
     }
 }
