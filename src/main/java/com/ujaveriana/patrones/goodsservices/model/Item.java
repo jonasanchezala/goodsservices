@@ -15,11 +15,6 @@ public class Item {
     private ItemType itemType;
     @ManyToMany
     private Set<UserApp> users;
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Set<Quotation> quotations;
 
     public int getId() {
         return id;
@@ -59,14 +54,6 @@ public class Item {
 
     public void setUsers(Set<UserApp> users) {
         this.users = users;
-    }
-
-    public Set<Quotation> getQuotations() {
-        return quotations;
-    }
-
-    public void setQuotations(Set<Quotation> quotations) {
-        this.quotations = quotations;
     }
 }
 

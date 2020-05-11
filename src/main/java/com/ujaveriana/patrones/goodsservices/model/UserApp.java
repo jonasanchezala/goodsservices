@@ -14,13 +14,8 @@ public class UserApp {
     private String name;
     @Enumerated(EnumType.STRING)
     private Profile profile;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     private Set<Item> items;
-    /*@OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Set<Quotation> quotations;*/
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true

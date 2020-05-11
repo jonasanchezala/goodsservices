@@ -17,7 +17,7 @@ public class Quotation {
             orphanRemoval = true
     )
     private Set<Offer> offers;
-    @ManyToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Item item;
 
     public Quotation() {
