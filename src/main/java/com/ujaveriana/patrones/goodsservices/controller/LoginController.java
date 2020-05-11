@@ -5,6 +5,7 @@ import com.ujaveriana.patrones.goodsservices.model.LoginResponse;
 import com.ujaveriana.patrones.goodsservices.service.LoginService;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/login")
 public class LoginController {
@@ -15,7 +16,6 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @CrossOrigin
     @PostMapping
     public LoginResponse Post(@RequestBody Credential credential) {
         return loginService.validateLogin(credential);
