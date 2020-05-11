@@ -25,4 +25,9 @@ public class OfferController {
     public List<Offer> Get(){
         return offerService.findAll();
     }
+
+    @GetMapping("{quotation_id}")
+    public List<Offer> Get(@PathVariable Integer quotation_id){
+        return offerService.filterByQuotation(quotation_id);
+    }
 }

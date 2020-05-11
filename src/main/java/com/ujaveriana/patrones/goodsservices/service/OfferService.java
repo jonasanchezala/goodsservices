@@ -39,4 +39,8 @@ public class OfferService {
     public List<Offer> findAll(){
         return (List<Offer>) offerRepository.findAll();
     }
+
+    public List<Offer> filterByQuotation(Integer quotation_id){
+        return (List<Offer>) offerRepository.findAllByQuotationId(quotation_id);
+    }
 }
