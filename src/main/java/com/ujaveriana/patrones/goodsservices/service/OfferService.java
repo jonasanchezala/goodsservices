@@ -9,6 +9,8 @@ import com.ujaveriana.patrones.goodsservices.repository.QuotationRepository;
 import com.ujaveriana.patrones.goodsservices.repository.UserAppRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OfferService {
     private final OfferRepository offerRepository;
@@ -32,5 +34,9 @@ public class OfferService {
         offer.setQuotation(quotation);
 
         return offerRepository.save(offer);
+    }
+
+    public List<Offer> findAll(){
+        return (List<Offer>) offerRepository.findAll();
     }
 }
