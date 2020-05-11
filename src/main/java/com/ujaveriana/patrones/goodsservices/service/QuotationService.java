@@ -6,6 +6,7 @@ import com.ujaveriana.patrones.goodsservices.repository.QuotationRepository;
 import com.ujaveriana.patrones.goodsservices.repository.UserAppRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,17 +46,19 @@ public class QuotationService {
         return quotationRepository.findById(id).orElse(null);
     }
 
-    public Quotation addOffer(Integer id, Offer offer) {
-        Quotation quotation = quotationRepository.findById(id).orElse(null);
-
-        if(Objects.nonNull(quotation)){
-            quotation.getOffers().add(offer);
-        }
-
-        return quotationRepository.save(quotation);
-    }
-
     public List<Quotation> findByClientId(Integer id) {
         return quotationRepository.findAllByUserAppId(id);
+    }
+
+    public List<Quotation> findBySupplier(Integer id) {
+        List<Quotation> quotations = new ArrayList<>();
+        UserApp supplier = userAppRepository.findById(id).orElse(null);
+        if(Objects.nonNull(supplier)){
+            supplier.getItems().stream().forEach(item -> {
+                List<Quotation> quotationsByItem = quotationRepository.findAllByItemId(item.getId());
+                quotations.addAll(quotationsByItem);
+            });
+        }
+        return quotations;
     }
 }

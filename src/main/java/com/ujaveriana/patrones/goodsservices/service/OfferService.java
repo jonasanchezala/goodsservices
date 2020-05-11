@@ -30,7 +30,7 @@ public class OfferService {
         Offer offer = new Offer();
         offer.setDecription(offerRequest.getDescription());
         offer.setPrice(offerRequest.getPrice());
-        offer.setSupplier(supplier);
+        offer.setUserApp(supplier);
         offer.setQuotation(quotation);
 
         return offerRepository.save(offer);

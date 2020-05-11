@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface QuotationRepository extends CrudRepository<Quotation, Integer> {
     List<Quotation> findAllByUserAppId(Integer userappid);
+    List<Quotation> findAllByItemId(Integer itemId);
 }

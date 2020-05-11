@@ -12,11 +12,6 @@ public class Quotation {
     private String description;
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private UserApp userApp;
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Set<Offer> offers;
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Item item;
 
@@ -47,13 +42,7 @@ public class Quotation {
         this.description = description;
     }
 
-    public Set<Offer> getOffers() {
-        return offers;
-    }
 
-    public void setOffers(Set<Offer> offers) {
-        this.offers = offers;
-    }
 
     public Item getItem() {
         return item;

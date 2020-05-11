@@ -16,11 +16,6 @@ public class UserApp {
     private Profile profile;
     @ManyToMany
     private Set<Item> items;
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Set<Offer> offers;
 
     public int getId() {
         return id;
@@ -68,14 +63,6 @@ public class UserApp {
 
     public void setItems(Set<Item> items) {
         this.items = items;
-    }
-
-    public Set<Offer> getOffers() {
-        return offers;
-    }
-
-    public void setOffers(Set<Offer> offers) {
-        this.offers = offers;
     }
 
 }
