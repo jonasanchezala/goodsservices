@@ -10,9 +10,9 @@ public class Offer {
     private int id;
     private String decription;
     private Double price;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private UserApp userApp;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Quotation quotation;
 
     public int getId() {
