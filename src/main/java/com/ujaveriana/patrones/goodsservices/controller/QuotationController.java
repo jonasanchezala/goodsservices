@@ -35,6 +35,11 @@ public class QuotationController {
         return quotationService.findById(id);
     }
 
+    @GetMapping("getByClientId/{id}")
+    public List<Quotation> GetByClientId(@PathVariable Integer id) {
+        return quotationService.findByClientId(id);
+    }
+
     @PutMapping("addOffer/{id}")
     public Quotation addOffer(@RequestBody Offer offer, @PathVariable Integer id) {
         return quotationService.addOffer(id, offer);

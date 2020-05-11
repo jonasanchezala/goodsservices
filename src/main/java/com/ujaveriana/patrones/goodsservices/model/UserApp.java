@@ -14,11 +14,17 @@ public class UserApp {
     private String name;
     @Enumerated(EnumType.STRING)
     private Profile profile;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Item> items;
-    @OneToMany
-    private Set<Quotation> quotations;
-    @OneToMany
+    /*@OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Quotation> quotations;*/
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private Set<Offer> offers;
 
     public int getId() {
@@ -69,14 +75,6 @@ public class UserApp {
         this.items = items;
     }
 
-    public Set<Quotation> getQuotations() {
-        return quotations;
-    }
-
-    public void setQuotations(Set<Quotation> quotations) {
-        this.quotations = quotations;
-    }
-
     public Set<Offer> getOffers() {
         return offers;
     }
@@ -84,4 +82,5 @@ public class UserApp {
     public void setOffers(Set<Offer> offers) {
         this.offers = offers;
     }
+
 }

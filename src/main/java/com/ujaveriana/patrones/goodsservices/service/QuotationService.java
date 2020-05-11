@@ -31,7 +31,7 @@ public class QuotationService {
         Quotation quotation = new Quotation();
         quotation.setName(quotationRequest.getName());
         quotation.setDescription(quotationRequest.getDescription());
-        quotation.setClient(userApp);
+        quotation.setUserApp(userApp);
         quotation.setItem(item);
 
         return quotationRepository.save(quotation);
@@ -53,5 +53,9 @@ public class QuotationService {
         }
 
         return quotationRepository.save(quotation);
+    }
+
+    public List<Quotation> findByClientId(Integer id) {
+        return quotationRepository.findAllByUserAppId(id);
     }
 }

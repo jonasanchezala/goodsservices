@@ -15,7 +15,10 @@ public class Item {
     private ItemType itemType;
     @ManyToMany
     private Set<UserApp> users;
-    @OneToMany
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private Set<Quotation> quotations;
 
     public int getId() {

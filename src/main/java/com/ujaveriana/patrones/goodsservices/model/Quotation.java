@@ -10,12 +10,18 @@ public class Quotation {
     private int id;
     private String name;
     private String description;
-    @ManyToOne
-    private UserApp client;
-    @OneToMany
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private UserApp userApp;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private Set<Offer> offers;
-    @ManyToOne
+    @ManyToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Item item;
+
+    public Quotation() {
+    }
 
     public int getId() {
         return id;
@@ -41,14 +47,6 @@ public class Quotation {
         this.description = description;
     }
 
-    public UserApp getClient() {
-        return client;
-    }
-
-    public void setClient(UserApp client) {
-        this.client = client;
-    }
-
     public Set<Offer> getOffers() {
         return offers;
     }
@@ -63,5 +61,13 @@ public class Quotation {
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public UserApp getUserApp() {
+        return userApp;
+    }
+
+    public void setUserApp(UserApp userApp) {
+        this.userApp = userApp;
     }
 }
